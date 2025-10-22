@@ -1,15 +1,10 @@
-# Portfolio — Pure CSS (Next.js App Router)
+# Hello hello
 
-Minimal Next.js portfolio using **plain CSS** (no Tailwind, no PostCSS).
+Welcome to my portfolio. there is no hoest yet so its just raw code now! Fun page not working atm either but the rest is!
+keep updated :3
 
 ## Run
 ```bash
 npm install
 npm run dev
-# open http://localhost:3000
 ```
-
-## Customize
-- Edit components in `/components`
-- Global styles in `app/styles.css`
-- Replace `/public/catpfp.jpg`
