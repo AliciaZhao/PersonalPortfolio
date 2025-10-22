@@ -1,0 +1,608 @@
+/* ===================== THEME & BASE ===================== */
+
+/* Knobs you can tweak quickly:
+   --hue ............. accent color angle (0–360)
+   --overlay ......... page tint over video (rgba)
+   --video-opacity ... visibility of the MP4 underlay
+   --blur ............ backdrop blur behind content
+*/
+
+:root {
+
+  /* Accent hue (ThemeCard updates this) */
+  --hue: 265; /* purple */
+
+  /* Dark theme defaults */
+  --bg: #000000;
+  --card: #b7acd4;
+  --edge: #6c4388;
+  --ink: #e5e5e5;
+  --muted: #360a3f;
+  --btnleft: #b8abe2;  
+  --btnright: #32214d;
+  --btnlefttext: #32214d; 
+  --btnrighttext: #b8abe2;
+
+
+  /* Accent derived from hue */
+  --primary: hsl(var(--hue) 90% 65%);
+  --primary-40: hsl(var(--hue) 90% 65% / 0.40);
+  --primary-12: hsl(var(--hue) 90% 65% / 0.12);
+  --primary-10: hsl(var(--hue) 90% 65% / 0.10);
+  
+
+  /* Overlay + video knobs */
+  --overlay: rgba(21, 14, 41, 0.774);
+  --shadow: 0 0 30px rgba(139,92,246,.15);
+  --radius: 16px;
+  --radius-sm: 12px;
+}
+
+
+
+/* ---------- Light theme overrides (toggle via <html data-theme="light">) ---------- */
+
+:root[data-theme="light"] {
+  --bg: #f7f7fb;
+  --card: #ffffff;
+  --edge: #e6e7ec;
+  --ink: #131316;
+  --muted: #61646b;
+  --overlay: rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 24px rgba(16,24,40,0.08);
+  --btnleft: #b8abe2;  
+  --btnright: #7349b8;
+  --btnlefttext: #543388; 
+  --btnrighttext: #b8abe2;
+}
+
+* { box-sizing: border-box; }
+
+html, body { 
+  margin: 0; 
+  padding: 0; 
+  height: 100%; 
+}
+
+html, body {
+  background: transparent;         /* keep transparent so video shows */
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+.bg-video {
+  position: fixed; 
+  inset: 0;
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: hue-rotate(calc(var(--hue) * 1deg)); 
+}
+
+
+.page-overlay {
+  position: relative; 
+  z-index: 1;
+  background:
+    var(--overlay);
+  }
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* edge-to-edge grid with ~20 px breathing room */
+.container {
+  width: 100%;
+  max-width: 100%;           /* remove central cap */
+  margin: 0 auto;
+  padding: 40px 20px 28px;   /* ← 20 px left/right space */
+  box-sizing: border-box;
+}
+
+/* optional tighter look on very large screens */
+@media (min-width: 1800px) {
+  .container {
+    padding-left: 120px;     /*  extra gutter on ultra-wide displays */
+    padding-right: 120px;
+  }
+}
+
+/* Base: single column */
+.cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;            /* space between the three columns */
+  align-items: start;   /* don't stretch vertically */
+}
+
+/* Each column stacks its cards with spacing */
+.col {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 24px;            /* vertical space between cards */
+  min-width: 0;         /* allow content to shrink inside the track */
+}
+
+/* Desktop: 3 columns – use minmax(0, fr) so content never forces overflow */
+@media (min-width: 1024px) {
+  .cols {
+    grid-template-columns:
+      minmax(0, 3fr)   /* left  ~30% */
+      minmax(0, 4fr)   /* mid   ~40% */
+      minmax(0, 3fr);  /* right ~30% */
+  }
+}
+
+
+.card {
+  background: var(--card);
+  border: 1px solid color-mix(in oklab, var(--edge) 85%, black);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  transition: border-color .18s ease;
+}
+
+.card:hover { 
+  border-color: var(--primary-40); 
+}
+
+
+.btn {
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 0px;
+  border: 1px solid color-mix(in oklab, var(--edge) 80%, rgb(42, 14, 68));
+  color: var(--ink); 
+  background: var(--outline);
+  cursor: pointer; 
+  text-decoration: none; 
+  font-size: 22px; 
+  gap: 8px;
+}
+
+.btn.primary { 
+  background: var(--btnlft); 
+  border-color: var(--primary); 
+  color: #fff; 
+}
+
+.btn:hover { 
+  filter: brightness(.98); 
+}
+
+.btn.primary:hover { 
+  filter: brightness(.98); 
+}
+
+.btn.ghost:hover { 
+  border-color: var(--primary-40); 
+}
+
+.btm.second{ 
+  background: var(--btnright); 
+  border-color: var(--primary); 
+  color: #fff; 
+}
+
+
+.badge, .chip {
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  padding: 6px 10px; 
+  font-size: 18px;
+  color: #ffffff; 
+  background: var(--btnclr);
+  border: 2px dotted var(--outline); 
+  border-radius: 10px;
+}
+
+.sectionHeader { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  margin-bottom: 14px; 
+}
+
+.sectionIcon { 
+  width: 36px; 
+  height: 36px; 
+  border-radius: 10px; 
+  border: 1px solid #27272a; 
+  background: #0a0a0a; 
+  display: grid; 
+  place-items: center; 
+  color: #d4d4d8; 
+}
+
+.sectionTitle { 
+  font-weight: 600; 
+  font-size: 0px; 
+  line-height: 1.1; 
+}
+
+.sectionSub { 
+  margin-top: 1px; 
+  font-size: 19px; 
+  color: var(--muted); 
+}
+
+.profileRow { 
+  display: flex; 
+  align-items: center; 
+  gap: 16px; 
+}
+
+.pfp { 
+  width: 80px; 
+  height: 80px; 
+  object-fit: cover; 
+  border: var(--outline) 2px dashed;
+}
+
+.profileName { 
+  font-size: 40px; 
+  font-weight: 600; 
+}
+
+.profileRole { 
+  color: var(--muted); 
+  font-size: 20px; 
+}
+
+.grid { 
+  display: grid; 
+  gap: 10px; 
+}
+
+.grid.two { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.grid.three { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.grid.four  { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+@media (max-width: 640px) {
+  .grid.four { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+.pill { 
+  background: var(--outline); 
+  border: 3px dotted var(--edge); 
+  border-radius: 12px; 
+  padding: 10px 12px; 
+  font-size: 18px; 
+  color: var(--ink);
+}
+
+.stat { 
+  text-align: center; 
+  background: var(--card); 
+  border: 1px solid var(--edge); 
+  border-radius: 12px; 
+  padding: 12px; 
+}
+
+.stat .value { 
+  font-size: 26px; 
+  font-weight: 600; 
+}
+
+.stat .label { 
+  font-size: 20px; 
+  color: var(--muted); 
+}
+
+.stack { 
+  display: grid; 
+  gap: 12px; 
+}
+
+.stepRow { 
+  display: flex; 
+  align-items: flex-start; 
+  gap: 12px; 
+  background: transparent; 
+  border: 2px solid var(--btnright); 
+  border-radius: 12px; 
+  padding: 16px; 
+  transition: border-color .2s ease; 
+}
+
+.stepRow:hover { 
+  border-color: color-mix(in oklab, var(--primary) 40%, #4d1c9b); 
+}
+
+.stepIcon { 
+  width: 36px; 
+  height: 36px; 
+  border-radius: 10px; 
+  background: #0a0a0a; 
+  border: 1px solid #27272a; 
+  display: grid; 
+  place-items: center; 
+  color: #d4d4d8; 
+}
+
+.stepBody { flex: 1; }
+
+.stepTitle { font-weight: 600; }
+
+.stepDesc { 
+  font-size: 18px; 
+  color: var(--muted); 
+  padding-bottom: 5px;
+}
+
+.stepNum { 
+  font-size: 12px; 
+  padding: 4px 8px; 
+  border-radius: 8px; 
+  background: #0a0a0a; 
+  border: 1px solid #27272a; 
+  color: var(--muted); 
+}
+
+
+
+/* ---------- Testimonials ---------- */
+
+.tgrid { 
+  display: grid; 
+  gap: 12px; 
+}
+
+@media (min-width: 900px) { 
+  .tgrid { grid-template-columns: repeat(2, minmax(0,1fr)); } 
+}
+
+.tcard { 
+  background: #18181b; 
+  border: 1px solid #27272a; 
+  border-radius: 12px; 
+  padding: 16px; 
+}
+
+.row { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: 12px; 
+}
+
+.avatar { 
+  width: 32px; 
+  height: 32px; 
+  border-radius: 999px; 
+  background: #3f3f46; 
+  color: #e4e4e7; 
+  display: grid; 
+  place-items: center; 
+  font-size: 12px; 
+}
+
+.handle { 
+  font-size: 12px; 
+  color: var(--muted); 
+  margin-top: -2px; 
+}
+
+.stars { 
+  display: flex; 
+  gap: 4px; 
+  color: #facc15; /* star color */ 
+}
+
+.body { 
+  font-size: 14px; 
+  color: var(--muted); 
+  margin-top: 10px; 
+}
+
+.footer { 
+  margin-top: 12px; 
+  text-align: center; 
+}
+
+.footer .small { 
+  color: var(--muted); 
+  font-size: 18px; 
+}
+
+.theme-row { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+}
+
+.theme-row .label { 
+  width: 40px; 
+  font-size: 18px; 
+  color: var(--muted); 
+}
+
+.theme-row input[type="range"] { 
+  flex: 1; 
+}
+
+.radio {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 6px; 
+  padding: 6px 10px;
+  border: 1px solid color-mix(in oklab, var(--edge) 85%, black);
+  border-radius: 999px; 
+  font-size: 10px; 
+  color: var(--btnlefttext);
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+}
+
+.radio input { 
+  accent-color: var(--primary); 
+}
+
+
+.swatch { 
+  width: 18px; 
+  height: 18px; 
+  border-radius: 999px; 
+  border: 1px solid #222222; 
+  cursor: pointer; 
+}
+
+.swatch:focus { 
+  outline: 2px solid var(--primary); 
+  outline-offset: 2px; 
+}
+:root{
+  --px: 2px;
+
+  /* flat lilith palette */
+  --window-border: #6f5a97;   /* frame + title + bottom strip */
+  --window-inner:  #a18da7;   /* lighter lilac interior */
+  --window-text:   #603d8f;   /* body text */
+  --title-text:    #e2d1dc;   /* title text / icons */
+  --outline:      #3b2c5a;   /* dark outline on light bg */
+  --btnclr:        #8f76b8;   /* window button color */
+  --techclr:      #3f1e75;   /* tech stack highlight color */
+}
+
+/* Light variant, toggled by adding data-theme="light" on <html> */
+:root[data-theme="light"] {
+  --window-border: #c9b7e6;   /* softer lilac frame */
+  --window-inner:  #ece5f5;   /* near-white inner panel */
+  --window-text:   #4a3570;   /* dark purple text */
+  --title-text:    #4f2a8f;   /* title strip text/icons */
+  --outline:       #d8caee;   /* subtle edge highlight */
+  --btnclr:        #8f76b8;   /* window button color */
+  --techclr:       #352269;   /* tech stack highlight color */
+}
+
+
+/* whole window */
+.window{
+  border: var(--px) solid var(--window-border);
+  background: var(--window-border);      /* frame, title, and bottom share this */
+  color: var(--window-text);
+  font-family: "pixelmplus12","Determination",monospace;
+  border-radius: 1px;
+  border-color: var(--outline);
+}
+
+.window .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--window-border);      /* same color as frame */
+  color: var(--title-text);
+  padding: calc(var(--px) * 3);
+  position: relative;                    /* needed for pseudo border */
+  border-bottom: var(--px) solid var(--window-border);
+}
+
+/* inner outline that sits just inside the title bar */
+.window .title::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--px));
+  left: calc(var(--px));
+  right: calc(var(--px));
+  bottom: calc(var(--px));
+  border: var(--px) solid var(--outline);  /* thin lighter inner border */
+  pointer-events: none;                       /* clicks pass through */
+}
+/* small square icon on left */
+.window .title::before{
+  content: "";
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 8);
+  margin-right: calc(var(--px) * 3);
+  background: var(--btnclr);
+  outline: var(--px) solid var(--window-border);
+  image-rendering: pixelated;
+}
+
+/* right-side window buttons */
+.window .win-btns{
+  display: flex;
+  gap: calc(var(--px) * 2);
+}
+.window .win-btn{
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 8);
+  background: var(--btnclr);
+  outline: var(--px) solid var(--window-border);
+}
+
+/* lighter inner content box */
+.window .content{
+  background: var(--window-inner);
+  color: var(--window-text);
+  padding: calc(var(--px) * 4);
+  margin: 0 calc(var(--px) * 3);
+  border: var(--px) solid var(--window-border);
+}
+
+/* bottom strip (same as title/frame) */
+.window .status{
+  background: var(--window-border);
+  border-top: var(--px) solid var(--window-border);
+  display: flex;
+  gap: var(--px);
+  padding: calc(var(--px) * 2) calc(var(--px) * 3);
+}
+
+/* little pixel squares on bottom left */
+.window .status i{
+  width: calc(var(--px) * 3);
+  height: calc(var(--px) * 3);
+  background: var(--btnclr);
+  outline: var(--px) solid var(--window-border);
+}
+
+.card, .window { width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; }
+
+/* Text rows that can grow should truncate */
+.truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.grid.three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+span{
+  font-size: 27px;
+}
+
+/* Hover preview styling */
+.rp-hover-preview {
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.55);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(0,0,0,0.15);
+  backdrop-filter: blur(2px);        /* looks nice over content */
+  pointer-events: none;              /* don’t steal hover */
+  z-index: 9999;                     /* above everything */
+  transition: transform 120ms ease, opacity 120ms ease;
+  transform: translateZ(0);
+  opacity: 0.98;
+}
+
+/* Hover preview styling */
+.rp-hover-preview {
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.55);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(0,0,0,0.15);
+  backdrop-filter: blur(2px);
+  opacity: 0.98;
+  transform: translateZ(0);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+/* Ensure rows don't clip the preview */
+.rp-row { overflow: visible; position: relative; }

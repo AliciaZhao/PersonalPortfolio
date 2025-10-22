@@ -1,0 +1,279 @@
+@font-face { font-family:"MSGothic"; src:url("/media/ms-gothic.ttf"); }
+
+/* ─── THEMES ────────────────────────────────────────────── */
+/* LIGHT (default) */
+:root,
+#background[data-chat-theme="light"]{
+  --ink:#3d2b60;
+
+  /* background image & fallback (define it here so light works too) */
+  --bg-image: url("https://files.catbox.moe/g1r2v8.png");  /* ← image used for light */
+  --bg-fallback:#efe7ff;
+
+  --bg-grad-start:#efe7ff;
+  --bg-grad-end:#e3d4ff;
+
+  --header-grad-1:#beaaff;
+  --header-grad-2:#ebe6ff;
+  --header-border:#b3a4ff;
+
+  --me-bg:hsl(305 100% 93%);
+  --me-text:#3a2760;
+  --me-border:#d1bfff;
+
+  --them-bg:#c3caff;
+  --them-text:#2d2f54;
+  --them-border:#c7cfff;
+
+  --timestamp:#6e5da3;
+  --input-bg:#faf7ff;
+  --input-border:#b6a5ff;
+  --pm-label:#c182e0;
+  --scroll:#c3b1f8;
+  --scroll-hover:#b299ff;
+  --pfp-outline:#c7b8ff;
+}
+
+/* DARK */
+:root[data-chat-theme="dark"],
+#background[data-chat-theme="dark"]{
+  --ink:#e9defd;
+
+  /* if you want a different image in dark, change it here.
+     if you want the SAME image, keep it equal to light’s. */
+  --bg-image: url("https://files.catbox.moe/g1r2v8.png");
+  --bg-fallback:#1b1530;
+
+  --bg-grad-start:#1b1530;
+  --bg-grad-end:#2a1f4b;
+
+  --header-grad-1:#4f3a85;
+  --header-grad-2:#6a51a8;
+  --header-border:#3f2f6d;
+
+  --me-bg:#47336f;
+  --me-text:#efe6ff;
+  --me-border:#8a6fe0;
+
+  --them-bg:#3a2c6a;
+  --them-text:#e7defd;
+  --them-border:#7b68c6;
+
+  --timestamp:#b9a9e6;
+  --input-bg:#2b2340;
+  --input-border:#5e4f8f;
+  --pm-label:#8b5bd1;
+  --scroll:#7d68c9;
+  --scroll-hover:#9a86ea;
+  --pfp-outline:#6e5aa8;
+}
+
+/* ─── BASE BACKGROUND (fixed) ──────────────────────────── */
+body, #background, #settingsMenu{
+  font-family:MS Gothic,"MSGothic";
+  font-smooth:never;
+  color:var(--ink);
+
+  /* image + solid fallback */
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-color: var(--bg-fallback);
+}
+
+/* keep this OUTSIDE the block above (it was inside and broke CSS) */
+#background{ padding-inline:12px; box-sizing:border-box; }
+
+/* ─── HEADER ───────────────────────────────────────────── */
+#top_banner{
+  display: none;
+}
+
+/* ─── MESSAGE ROW + AVATAR ────────────────────────────── */
+:root{
+  --pfp-size:50px;
+  --pfp-default-url:url("https://files.catbox.moe/vkk0g2.png");
+  --pfp-1:url("https://files.catbox.moe/vkk0g2.png");
+  --pfp-2:url("https://files.catbox.moe/n7l72t.png");
+  --pfp-3:url("https://files.catbox.moe/93sl85.png");
+}
+
+.msgWrapper{
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+  width:100%;
+  padding-block:0;
+}
+.msgWrapper:has(.received),
+.msgWrapper:has(.recieved){ flex-direction:row; }
+.msgWrapper:has(.sent){ flex-direction:row-reverse; }
+
+.msgWrapper::before{
+  content:"";
+  width:var(--pfp-size);
+  height:var(--pfp-size);
+  border-radius:4px;
+  background-image:var(--pfp-sprite,var(--pfp-default-url));
+  background-size:cover;
+  background-position:center;
+  outline:1px solid var(--pfp-outline);
+  box-shadow:0 2px 6px rgba(180,160,255,.25);
+  flex-shrink:0;
+  transform:translateY(2px);
+}
+.msgWrapper>.allMessages{
+  flex:0 1 auto;
+  max-width:calc(100% - var(--pfp-size) - 18px);
+  margin:0 4px !important;
+}
+.msgWrapper+.msgWrapper{ margin-top:10px !important; }
+
+/* ─── BUBBLES ─────────────────────────────────────────── */
+.allMessages{
+  position:relative;
+  border:1px solid var(--them-border);
+  border-radius:8px;
+  padding:8px 10px;
+  font-size:22px;
+  box-shadow:0 0 2px rgba(255,255,255,.8),0 2px 4px rgba(90,70,140,.3);
+  background:var(--them-bg);
+  color:var(--them-text);
+}
+
+/* outgoing/incoming colors */
+.sent{
+  background:var(--me-bg)!important;
+  color:var(--me-text)!important;
+  border-color:var(--me-border)!important;
+}
+.received,.recieved{
+  background:var(--them-bg)!important;
+  color:var(--them-text)!important;
+  border-color:var(--them-border)!important;
+}
+
+/* PM label */
+.allMessages.pm{ border-color:var(--pm-label); }
+.allMessages.pm:after{
+  content:"Private Message";
+  position:absolute; right:5vw; bottom:100%;
+  padding:5px; height:16px;
+  background-color:var(--pm-label); color:#fff;
+  border-radius:5px 5px 0 0;
+}
+
+/* text rhythm */
+.allMessages .msg,
+.allMessages .username,
+.allMessages .system,
+.allMessages .timestamp{
+  font-family:MS Gothic,"MSGothic",monospace !important;
+  letter-spacing:0 !important;
+  line-height:1.3 !important;
+  margin:2px 0 !important;
+}
+
+/* timestamp */
+#timestamp{ font-size:8pt; margin-top:10px !important; padding-left:30px; color:var(--timestamp); }
+
+/* inputs */
+#input,#nameEntry{
+  background:var(--input-bg);
+  border-top:1px solid var(--input-border);
+  color:var(--ink);
+}
+#name{ background:#fff; border:1px solid var(--input-border); padding:2px; }
+
+/* typing indicator */
+#is_typing{
+  background:var(--input-bg);
+  border:1px solid var(--input-border);
+  border-radius:3px;
+  right:10px; bottom:27px; color:var(--ink); font-size:10pt;
+  filter:drop-shadow(0 0 2px #fff);
+}
+#is_typing>span{ background-color:var(--input-border); height:2px; width:2px; }
+
+/* overlay tint (keep if you like; remove if you want just the image) */
+#background::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+  background:linear-gradient(180deg,rgba(200,180,255,.25),rgba(255,240,255,.25));
+}
+
+/* scrollbar */
+::-webkit-scrollbar{ width:8px; }
+::-webkit-scrollbar-thumb{ background:var(--scroll); border-radius:4px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--scroll-hover); }
+
+/* emoji alignment */
+.emoji{ vertical-align:middle; margin:0 2px; }
+
+/* ─── AUTO-PFP ASSIGNMENT (ASCII ÷ 3) ─────────────────── */
+.msgWrapper:has(.allMessages[uid$="A"]),
+.msgWrapper:has(.allMessages[uid$="D"]),
+.msgWrapper:has(.allMessages[uid$="G"]),
+.msgWrapper:has(.allMessages[uid$="J"]),
+.msgWrapper:has(.allMessages[uid$="M"]),
+.msgWrapper:has(.allMessages[uid$="P"]),
+.msgWrapper:has(.allMessages[uid$="S"]),
+.msgWrapper:has(.allMessages[uid$="V"]),
+.msgWrapper:has(.allMessages[uid$="Y"]),
+.msgWrapper:has(.allMessages[uid$="b"]),
+.msgWrapper:has(.allMessages[uid$="e"]),
+.msgWrapper:has(.allMessages[uid$="h"]),
+.msgWrapper:has(.allMessages[uid$="k"]),
+.msgWrapper:has(.allMessages[uid$="n"]),
+.msgWrapper:has(.allMessages[uid$="q"]),
+.msgWrapper:has(.allMessages[uid$="t"]),
+.msgWrapper:has(.allMessages[uid$="w"]),
+.msgWrapper:has(.allMessages[uid$="z"]),
+.msgWrapper:has(.allMessages[uid$="0"]),
+.msgWrapper:has(.allMessages[uid$="3"]),
+.msgWrapper:has(.allMessages[uid$="6"]),
+.msgWrapper:has(.allMessages[uid$="9"]){ --pfp-sprite:var(--pfp-1); }
+
+.msgWrapper:has(.allMessages[uid$="B"]),
+.msgWrapper:has(.allMessages[uid$="E"]),
+.msgWrapper:has(.allMessages[uid$="H"]),
+.msgWrapper:has(.allMessages[uid$="K"]),
+.msgWrapper:has(.allMessages[uid$="N"]),
+.msgWrapper:has(.allMessages[uid$="Q"]),
+.msgWrapper:has(.allMessages[uid$="T"]),
+.msgWrapper:has(.allMessages[uid$="W"]),
+.msgWrapper:has(.allMessages[uid$="Z"]),
+.msgWrapper:has(.allMessages[uid$="c"]),
+.msgWrapper:has(.allMessages[uid$="f"]),
+.msgWrapper:has(.allMessages[uid$="i"]),
+.msgWrapper:has(.allMessages[uid$="l"]),
+.msgWrapper:has(.allMessages[uid$="o"]),
+.msgWrapper:has(.allMessages[uid$="r"]),
+.msgWrapper:has(.allMessages[uid$="u"]),
+.msgWrapper:has(.allMessages[uid$="x"]),
+.msgWrapper:has(.allMessages[uid$="a"]),
+.msgWrapper:has(.allMessages[uid$="1"]),
+.msgWrapper:has(.allMessages[uid$="4"]),
+.msgWrapper:has(.allMessages[uid$="7"]){ --pfp-sprite:var(--pfp-2); }
+
+.msgWrapper:has(.allMessages[uid$="C"]),
+.msgWrapper:has(.allMessages[uid$="F"]),
+.msgWrapper:has(.allMessages[uid$="I"]),
+.msgWrapper:has(.allMessages[uid$="L"]),
+.msgWrapper:has(.allMessages[uid$="O"]),
+.msgWrapper:has(.allMessages[uid$="R"]),
+.msgWrapper:has(.allMessages[uid$="U"]),
+.msgWrapper:has(.allMessages[uid$="X"]),
+.msgWrapper:has(.allMessages[uid$="A"]),
+.msgWrapper:has(.allMessages[uid$="d"]),
+.msgWrapper:has(.allMessages[uid$="g"]),
+.msgWrapper:has(.allMessages[uid$="j"]),
+.msgWrapper:has(.allMessages[uid$="m"]),
+.msgWrapper:has(.allMessages[uid$="p"]),
+.msgWrapper:has(.allMessages[uid$="s"]),
+.msgWrapper:has(.allMessages[uid$="v"]),
+.msgWrapper:has(.allMessages[uid$="y"]),
+.msgWrapper:has(.allMessages[uid$="2"]),
+.msgWrapper:has(.allMessages[uid$="5"]),
+.msgWrapper:has(.allMessages[uid$="8"]){ --pfp-sprite:var(--pfp-3); }
