@@ -12,6 +12,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Add the chattable script here */}
         <script src="https://iframe.chat/scripts/main.min.js" async></script>
+        <link rel="icon" type="image/png" href="/icon.png" />
       </head>
       <body>
         <video
