@@ -114,7 +114,6 @@ export default function CharacterWindow({
     startTypewriter(first);
   }, []);
 
-  // --- pointer events (FIXED flow) ---
   const onDown = () => {
     if (evolved) {
       setPressed(true);
@@ -172,9 +171,12 @@ export default function CharacterWindow({
         <div
           style={{
             position: "relative",
-            width: `min(${width}px, 92vw)`,
+            width: "100%",
+            maxWidth: `${width}px`,
             margin: "8px auto 0",
             userSelect: "none",
+            boxSizing: "border-box",
+            overflow: "hidden",
           }}
         >
           <img
@@ -187,10 +189,13 @@ export default function CharacterWindow({
             draggable={false}
             style={{
               display: "block",
+              maxWidth: "100%",
               width: "100%",
               height: "auto",
+              objectFit: "contain",
               imageRendering: "pixelated",
               cursor: "pointer",
+              transformOrigin: "center bottom",
               transform:
                 evolved && shake
                   ? "translateX(0)"
@@ -205,10 +210,9 @@ export default function CharacterWindow({
           <div
             style={{
               position: "absolute",
-              left: "50%",
+              left: "8px",
+              right: "8px",
               bottom: "8px",
-              transform: "translateX(-50%)",
-              width: "96%",
               border: "3px solid #fff",
               background: "#0D0D0D",
               boxShadow: "0 0 0 2px #000 inset, 0 0 0 2px #000",
@@ -244,7 +248,7 @@ export default function CharacterWindow({
             <div
               style={{
                 position: "absolute",
-                right: 10,
+                right: 12,
                 bottom: 6,
                 fontSize: 18,
                 color: evolved ? "#FF4444" : "#FF6DAA",

@@ -57,10 +57,31 @@ export default function ActivitiesCard() {
     let cancelled = false;
     (async () => {
       try {
-        const r = await fetch("/api/github-activity", { cache: "no-store" });
-        const j = await r.json();
-        if (!cancelled) {
-          r.ok ? setData(j) : setErr(j?.error || "Failed to load");
+        const r = await fetch(
+          "https://api.github.com/users/AliciaZhao/events/public",
+          { headers: { Accept: "application/vnd.github+json" } }
+        );
+        const events = await r.json();
+
+        if (cancelled) return;
+        if (!r.ok) {
+          setErr(events?.message || "Failed to load");
+        } else {
+          const pushes = (events || [])
+            .filter((e) => e.type === "PushEvent")
+            .map((e) => ({
+              id: e.id,
+              repo: e.repo?.name || "unknown",
+              branch: e.payload?.ref?.split("/").pop() || "main",
+              ts: e.created_at,
+              commitCount: e.payload?.size || 0,
+              commits: (e.payload?.commits || []).map((c) => ({
+                sha: c.sha,
+                msg: c.message,
+                url: `https://github.com/${e.repo?.name}/commit/${c.sha}`,
+              })),
+            }));
+          setData({ pushes });
         }
       } catch (e) {
         if (!cancelled) setErr(String(e));
@@ -72,6 +93,7 @@ export default function ActivitiesCard() {
       cancelled = true;
     };
   }, []);
+
 
   const FEED_HEIGHT = 220; // px
 
@@ -99,7 +121,6 @@ export default function ActivitiesCard() {
           </div>
         )}
 
-        {/* Scrollable feed */}
         <div
           className="stack"
           style={{
