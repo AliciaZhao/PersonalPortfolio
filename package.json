@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && next export",
+    "start": "npx serve out",
     "lint": "next lint"
   },
   "dependencies": {
