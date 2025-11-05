@@ -7,13 +7,10 @@ function Chip({ children }) {
 export default function ProfileCard() {
   return (
     <section className="window">
-      {/* boxed title strip */}
       <div className="title">
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <span>bio</span>
         </div>
-
-        {/* tiny window buttons at right (optional) */}
         <div className="win-btns">
           <i className="win-btn" aria-hidden />
           <i className="win-btn" aria-hidden />
@@ -21,7 +18,6 @@ export default function ProfileCard() {
         </div>
       </div>
 
-      {/* boxed content strip */}
       <div className="content">
         <div className="profileRow">
           <img className="pfp" src="/catpfp.jpg" alt="Profile" />
@@ -46,9 +42,9 @@ export default function ProfileCard() {
         </div>
 
         <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
-          <a className="btn" href="mailto:alicia.zhao1@gmail.com" aria-label="Email">
+          <a className="btn" href="https://www.linkedin.com/in/alicia-zhao-52874a229" aria-label="Email">
             <Mail size={16} style={{ marginRight: 6 }} />
-            Hire Me
+            Linkdin
           </a>
           <a
             className="btn"
@@ -63,7 +59,6 @@ export default function ProfileCard() {
         </div>
       </div>
 
-      {/* tiny status blocks (optional) */}
       <div className="status">
         <i></i>
         <i></i>

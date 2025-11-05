@@ -2,8 +2,7 @@
 
 import ProfileCard from "../components/ProfileCard";
 import Tools from "../components/Tools";
-import TechStack from "../components/TechStack";
-import WorkProcess from "../components/WorkProcess";
+import RecentWork from "../components/RecentWork";
 
 import Activity from "../components/Activity";
 import Footer from "../components/Footer";
@@ -28,15 +27,14 @@ export default function Home() {
 
           {/* MIDDLE */}
           <div className="col col-mid">
-            <TechStack />
-            <Tools />
+            <RecentWork />
+            <Activity />
             <Confetti />
           </div>
 
           {/* RIGHT */}
           <div className="col col-right">
-            <WorkProcess />
-            <Activity />
+            <Tools />
             <Character />
           </div>
         </div>

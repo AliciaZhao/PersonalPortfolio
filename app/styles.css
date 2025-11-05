@@ -606,3 +606,57 @@ span{
 
 /* Ensure rows don't clip the preview */
 .rp-row { overflow: visible; position: relative; }
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.popup-box {
+  background: rgba(25, 25, 28, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 14px;
+  padding: 20px;
+  width: min(400px, 85%);
+  color: #fff;
+  text-align: center;
+  animation: popin 0.18s ease-out;
+}
+
+.popup-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.popup-body {
+  opacity: 0.9;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+@keyframes popin {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

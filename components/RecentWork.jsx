@@ -1,4 +1,3 @@
-// RecentProjects.jsx
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -11,20 +10,15 @@ function PreviewPortal({ rect, localY, src, dims, gap, show }) {
 
   const { w: PREV_W, h: PREV_H } = dims;
 
-  // Desired top = cardTop + clamped localY
   let top = rect.top + localY;
 
-  // Try left dock first
   let left = rect.left - gap - PREV_W;
 
-  // Clamp vertical within viewport
   const vh = typeof window !== "undefined" ? window.innerHeight : 0;
   top = clamp(top, 8, vh - PREV_H - 8);
 
-  // If no room on the left, flip to the right
   if (left < 8) left = rect.right + gap;
 
-  // Clamp horizontal, too
   const vw = typeof window !== "undefined" ? window.innerWidth : 0;
   left = clamp(left, 8, vw - PREV_W - 8);
 
@@ -45,7 +39,7 @@ function PreviewPortal({ rect, localY, src, dims, gap, show }) {
     transform: "translateZ(0)",
     transition: "opacity 120ms ease, transform 120ms ease",
     pointerEvents: "none",
-    zIndex: 2147483647, // max out; beats pesky overlays
+    zIndex: 2147483647, // on top
   };
 
   return createPortal(<div style={style} />, document.body);
@@ -56,6 +50,7 @@ function Project({ n, title, desc, tech = [], live, code, preview }) {
   const [showPrev, setShowPrev] = useState(false);
   const [rect, setRect] = useState(null);
   const [localY, setLocalY] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
 
   const PREV_DIMS = { w: 360, h: 220 };
   const GAP = 16;
@@ -82,7 +77,6 @@ function Project({ n, title, desc, tech = [], live, code, preview }) {
     setLocalY(clampedY);
   };
 
-  // Keep position accurate during scroll/resize/layout shifts while visible
   useEffect(() => {
     if (!showPrev) return;
     const handler = () => updateRect();
@@ -121,22 +115,60 @@ function Project({ n, title, desc, tech = [], live, code, preview }) {
 
           {(live || code) && (
             <div className="rp-actions">
-              {live && (
+              {live && live !== "#" ? (
                 <a className="btn right" href={live} target="_blank" rel="noreferrer">
                   Live
                 </a>
+              ) : (
+                <button
+                  className="btn right"
+                  onClick={() => setShowPopup(true)}
+                >
+                  Live
+                </button>
               )}
+
               {code && (
                 <a className="btn right" href={code} target="_blank" rel="noreferrer">
                   Code
                 </a>
+              )}
+
+              {showPopup && (
+                <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+                  <div
+                    className="popup-box"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="popup-title">No Live Demo Yet</div>
+                    <div className="popup-body">
+                      This project currently doesn’t have a live version.
+                      <br />
+                      You can still check out the repository and use the README to run it locally.
+                    </div>
+                    <div className="popup-actions">
+                      {code && (
+                        <a
+                          className="btn"
+                          href={code}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          View on GitHub
+                        </a>
+                      )}
+                      <button className="btn" onClick={() => setShowPopup(false)}>
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           )}
         </div>
       </div>
 
-      {/* Render preview into body so it isn't clipped by containers */}
       {preview && (
         <PreviewPortal
           rect={rect}
@@ -158,9 +190,9 @@ export default function RecentProjects() {
       title: "PotteryShop — E-commerce Platform",
       desc: "React + Express + MongoDB + Stripe with admin dashboard and analytics widgets.",
       tech: ["React", "Express", "MongoDB", "Stripe"],
-      live: "#",
-      code: "#",
-      preview: "/images/previews/potteryshop.png",
+      live: "https://katherinezhao.studio",
+      code: "https://github.com/orgs/KatPottery/repositories",
+      preview: "/preview/Katpottery.png",
     },
     {
       n: 2,
@@ -168,26 +200,26 @@ export default function RecentProjects() {
       desc: "React Native client, FastAPI scheduler, Google Maps overlays, PostgreSQL backend.",
       tech: ["React Native", "FastAPI", "PostgreSQL", "Maps API"],
       live: "#",
-      code: "#",
-      preview: "/images/previews/ember-alert.png",
+      code: "https://github.com/orgs/cmpe-195-capstone-project/repositories",
+      preview: "/preview/fires.png",
     },
     {
       n: 3,
-      title: "AI Admin Query Builder",
-      desc: "Read-only MongoDB widgets with Monaco editor preview and safety checks.",
-      tech: ["Monaco", "MongoDB", "Node", "Docker"],
-      live: "#",
-      code: "#",
-      preview: "/images/previews/ai-admin.png",
-    },
-    {
-      n: 4,
       title: "Portfolio — Nalkaloun",
       desc: "Personalized portfolio website for artist Nalkaloun, built with React and Tailwind CSS.",
       tech: ["React", "CSS", "UX"],
+      live: "https://nalkaloun.art",
+      code: "https://github.com/AliciaZhao/Nalkaloun",
+      preview: "/preview/nalk.png",
+    },
+    {
+      n: 4,
+      title: "Drawing Timer",
+      desc: "Drawing timer for multiple college artists to work on figure studies on each figure with configurable timer, tracking application and folder management.",
+      tech: ["Rust", "eframe", "rodio"],
       live: "#",
-      code: "#",
-      preview: "/images/previews/nalkaloun.png",
+      code: "https://github.com/AliciaZhao/timerdrawing",
+      preview: "/preview/timer.png",
     },
   ];
 

@@ -9,7 +9,7 @@ function ActivityItem({ p }) {
           {p.repo} <span style={{ opacity: 0.6 }}>@ {p.branch}</span>
         </div>
         <div className="stepDesc">
-          {p.commitCount} commit{p.commitCount === 1 ? "" : "s"} pushed
+          1 commit{p.commitCount === 1 ? "" : "s"} pushed
         </div>
 
         {p.commits?.length > 0 && (
