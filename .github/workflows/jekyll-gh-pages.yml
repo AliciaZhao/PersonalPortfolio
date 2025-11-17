@@ -34,7 +34,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist   # or "build" depending on your setup
+          path: out   # or "build" depending on your setup
 
   deploy:
     needs: build
