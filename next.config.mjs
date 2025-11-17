@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
-export default {
-  reactStrictMode: true,
-  output: 'export', 
-  images: { unoptimized: true }
+const isProd = process.env.NODE_ENV === "production";
+
+const repoName = "PersonalPortfolio";
+
+const nextConfig = {
+  output: "export",
+  assetPrefix: isProd ? `/${repoName}/` : "",
+  basePath: isProd ? `/${repoName}` : "",
+  images: {
+    unoptimized: true,
+  },
 };
+
+export default nextConfig;

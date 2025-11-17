@@ -177,11 +177,10 @@ export default function MusicCard() {
     setMode("player");
   }
 
-  /* === High-contrast bar colors (works in both themes) === */
   const barVars = {
-    "--bar-track": "#decbe6", // track darker than panel
-    "--bar-edge":  "#8a6bb8", // crisp outline
-    "--bar-fill":  "#2f20c9", // deep purple fill
+    "--bar-track": "#decbe6",
+    "--bar-edge":  "#8a6bb8",
+    "--bar-fill":  "#2f20c9",
   };
 
   /* ---------- RENDER ---------- */
@@ -225,7 +224,6 @@ export default function MusicCard() {
     );
   }
 
-  /* default: PLAYER view */
   return (
     <section className="window" style={barVars}>
       <div className="title">

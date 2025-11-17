@@ -1,24 +1,23 @@
 "use client";
 
 export default function TechStackMerged({
-  email = "you@example.com",
+  email = "alicia.zhao1@gmail.com",
   viewHref = "#projects",
   stats = [
     { label: "Projects", value: "15+" },
     { label: "Technologies", value: "10+" },
-    { label: "Yrs Experience", value: "4+" },
+    { label: "Yrs Experience", value: "5+" },
   ],
   stacks = {
-    Frontend: ["React", "Vite", "Tailwind CSS", "Framer Motion", "Lucide Icons", "shadcn/ui"],
+    Frontend: ["React", "Vite", "Tailwind CSS", "Framer Motion", "shadcn/ui"],
     Backend: ["Node.js", "Express.js", "FastAPI", "Stripe API", "Multer", "CORS"],
     Database: ["MongoDB", "Mongoose", "PostgreSQL", "MySQL"],
-    DevOps: ["Docker", "Render", "Netlify", "Vercel", "Railway", "Grafana / Prometheus"],
+    DevOps: ["Docker", "Render", "Netlify", "Vercel", "Railway", "Grafana(main) / Prometheus"],
     Languages: ["JavaScript", "Python", "Java", "C++", "Rust"],
   },
 }) {
   return (
     <section className="window">
-      {/* title bar */}
       <div className="title">
         <span>Tech Stack & Tools</span>
         <div className="win-btns">
@@ -28,9 +27,7 @@ export default function TechStackMerged({
         </div>
       </div>
 
-      {/* content */}
       <div className="content" style={{ padding: 8 }}>
-        {/* Tools / Frameworks first */}
         <div className="sectionSub" style={{ marginBottom: 10 }}>
           Tools, frameworks, and technologies I commonly use.
         </div>
@@ -86,7 +83,6 @@ export default function TechStackMerged({
             <div className="sectionSub">Let’s work together</div>
 
             <div style={{ display: "flex", gap: 8 }}>
-              {/* fixed-color Email button */}
               <a
                 className="btn"
                 href={`mailto:${email}`}
@@ -106,7 +102,6 @@ export default function TechStackMerged({
                 Email Me
               </a>
 
-              {/* ghost View Projects button */}
               <a
                 className="btn ghost"
                 href={viewHref}
