@@ -8,7 +8,7 @@ export default function GlobalChat() {
     s.async = true;
     s.onload = () => {
       if (window.chattable?.initialize) {
-        window.chattable.initialize({ stylesheet: "/chattable.css" });
+        window.chattable.initialize({ stylesheet: "https://aliciazhao.github.io/PersonalPortfolio/chattable.css" });
       }
     };
     document.head.appendChild(s);
