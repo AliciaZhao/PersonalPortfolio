@@ -20,7 +20,7 @@ export default function ProfileCard() {
 
       <div className="content">
         <div className="profileRow">
-          <img className="pfp" src="/catpfp.jpg" alt="Profile" />
+          <img className="pfp" src="catpfp.jpg" alt="Profile" />
           <div>
             <div className="profileName">Alicia Zhao</div>
             <div className="profileRole">Full Stack Developer</div>

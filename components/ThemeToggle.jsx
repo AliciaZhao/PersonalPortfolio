@@ -8,7 +8,7 @@ const getStored = (k, fallback) => {
 
 export default function ThemeCard() {
   const [mode, setMode] = useState/** @type {"auto"|"dark"|"light"} */("auto");
-  const [hue, setHue]   = useState(0);          // ✅ default hue = 0
+  const [hue, setHue]   = useState(0); 
 
   const prefersDark = useMemo(
     () => (typeof window !== "undefined" ? window.matchMedia("(prefers-color-scheme: dark)") : null),

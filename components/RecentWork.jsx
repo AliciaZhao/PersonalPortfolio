@@ -192,7 +192,7 @@ export default function RecentProjects() {
       tech: ["React", "Express", "MongoDB", "Stripe"],
       live: "https://katherinezhao.studio",
       code: "https://github.com/orgs/KatPottery/repositories",
-      preview: "/preview/Katpottery.png",
+      preview: "preview/Katpottery.png",
     },
     {
       n: 2,
@@ -201,7 +201,7 @@ export default function RecentProjects() {
       tech: ["React Native", "FastAPI", "PostgreSQL", "Maps API"],
       live: "#",
       code: "https://github.com/orgs/cmpe-195-capstone-project/repositories",
-      preview: "/preview/fires.png",
+      preview: "preview/fires.png",
     },
     {
       n: 3,
@@ -210,7 +210,7 @@ export default function RecentProjects() {
       tech: ["React", "CSS", "UX"],
       live: "https://nalkaloun.art",
       code: "https://github.com/AliciaZhao/Nalkaloun",
-      preview: "/preview/nalk.png",
+      preview: "preview/nalk.png",
     },
     {
       n: 4,
@@ -219,7 +219,7 @@ export default function RecentProjects() {
       tech: ["Rust", "eframe", "rodio"],
       live: "#",
       code: "https://github.com/AliciaZhao/timerdrawing",
-      preview: "/preview/timer.png",
+      preview: "preview/timer.png",
     },
   ];
 

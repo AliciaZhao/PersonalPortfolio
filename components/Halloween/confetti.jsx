@@ -21,7 +21,7 @@ export default function CandyConfetti() {
 
   return (
     <img
-      src="/candy.png"
+      src="candy.png"
       alt="Candy"
       onClick={throwCandiesEverywhere}
       style={{
