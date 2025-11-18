@@ -1,4 +1,7 @@
-@font-face { font-family:"MSGothic"; src:url("/media/ms-gothic.ttf"); }
+@font-face {
+  font-family:"MSGothic";
+  src:url("/PersonalPortfolio/media/ms-gothic.ttf");
+}
 
 /* ─── THEMES ────────────────────────────────────────────── */
 /* LIGHT (default) */

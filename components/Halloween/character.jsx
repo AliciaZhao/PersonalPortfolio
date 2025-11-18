@@ -4,8 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 export default function CharacterWindow({
   name = "ALICIA",
   width = 520,
-  soundSrc = "/sounds/click.mp3",
-  evolveSoundSrc = "/sounds/annoyed.mp3",
+  soundSrc = "sounds/click.mp3",
+  evolveSoundSrc = "sounds/annoyed.mp3",
   volume = 1.0,
   allowOverlap = false,
 }) {
@@ -180,7 +180,7 @@ export default function CharacterWindow({
           }}
         >
           <img
-            src={`/character${current}.png`}
+            src={`character${current}.png`}
             alt="character"
             onPointerDown={onDown}
             onPointerUp={onUp}
