@@ -2,8 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const DEFAULT_PLAYLIST =
+  "https://youtube.com/playlist?list=PLD07E9C64CA51C7F9&si=1lx8JAz_Sk7meSPE";
+  /* HALOWEEN
   "https://youtube.com/playlist?list=PL8zpqoBijZMKqeOKglDyHEmz61fMTjHMH&si=nY99Ybcr1vXM7W_2";
-
+  */
 const ICN = {
   PREV:  "https://lilithdev.neocities.org/shrine/vg/nso/sprites/music_prev.png",
   PLAY:  "https://lilithdev.neocities.org/shrine/vg/nso/sprites/music_play.png",
@@ -178,9 +180,14 @@ export default function MusicCard() {
   }
 
   const barVars = {
+    /*HALOWEEN
     "--bar-track": "#decbe6",
     "--bar-edge":  "#8a6bb8",
     "--bar-fill":  "#2f20c9",
+    */
+    "--bar-track": "#cbdde6ff",
+    "--bar-edge":  "rgba(203, 224, 230, 1)",
+    "--bar-fill":  "#2055c9ff",
   };
 
   /* ---------- RENDER ---------- */

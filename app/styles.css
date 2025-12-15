@@ -12,7 +12,7 @@
   /* Accent hue (ThemeCard updates this) */
   --hue: 265; /* purple */
 
-  /* Dark theme defaults */
+  /* Dark theme defaults 
   --bg: #000000;
   --card: #b7acd4;
   --edge: #6c4388;
@@ -22,7 +22,17 @@
   --btnright: #32214d;
   --btnlefttext: #32214d; 
   --btnrighttext: #b8abe2;
+  */
 
+  --bg: #000000;
+  --card: #acc2d4;
+  --edge: #436788;
+  --ink: #e5e5e5;
+  --muted: #0a123f;
+  --btnleft: #abcce2;  
+  --btnright: #21364d;
+  --btnlefttext: #21394d; 
+  --btnrighttext: #abbce2;
 
   /* Accent derived from hue */
   --primary: hsl(var(--hue) 90% 65%);
@@ -41,7 +51,7 @@
 
 
 /* ---------- Light theme overrides (toggle via <html data-theme="light">) ---------- */
-
+/* haloween theme 
 :root[data-theme="light"] {
   --bg: #f7f7fb;
   --card: #ffffff;
@@ -54,6 +64,21 @@
   --btnright: #7349b8;
   --btnlefttext: #543388; 
   --btnrighttext: #b8abe2;
+}
+*/
+
+:root[data-theme="light"] {
+  --bg: #f7f7fb;
+  --card: #ffffff;
+  --edge: #e6e7ec;
+  --ink: #131316;
+  --muted: #61646b;
+  --overlay: rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 24px rgba(16,24,40,0.08);
+  --btnleft: #abe2e2;  
+  --btnright: #498cb8;
+  --btnlefttext: #337088; 
+  --btnrighttext: #abe0e2;
 }
 
 * { box-sizing: border-box; }
@@ -462,27 +487,46 @@ html, body {
 :root{
   --px: 2px;
 
-  /* flat lilith palette */
-  --window-border: #6f5a97;   /* frame + title + bottom strip */
-  --window-inner:  #a18da7;   /* lighter lilac interior */
-  --window-text:   #603d8f;   /* body text */
-  --title-text:    #e2d1dc;   /* title text / icons */
-  --outline:      #3b2c5a;   /* dark outline on light bg */
-  --btnclr:        #8f76b8;   /* window button color */
-  --techclr:      #3f1e75;   /* tech stack highlight color */
+  /* flat haloween palette 
+  --window-border: #6f5a97; 
+  --window-inner:  #a18da7;
+  --window-text:   #603d8f;
+  --title-text:    #e2d1dc;
+  --outline:      #3b2c5a;
+  --btnclr:        #8f76b8;
+  --techclr:      #3f1e75; 
+  */
+
+  --window-border: rgb(68, 89, 128); 
+  --window-inner:  #8d9ba7;
+  --window-text:   #3d718f;
+  --title-text:    #d1d8e2;
+  --outline:      #2c405a;
+  --btnclr:        #7690b8;
+  --techclr:      #1e4e75; 
 }
 
-/* Light variant, toggled by adding data-theme="light" on <html> */
+/* Light variant, toggled by adding data-theme="light" on <html>
 :root[data-theme="light"] {
-  --window-border: #c9b7e6;   /* softer lilac frame */
-  --window-inner:  #ece5f5;   /* near-white inner panel */
-  --window-text:   #4a3570;   /* dark purple text */
-  --title-text:    #4f2a8f;   /* title strip text/icons */
-  --outline:       #d8caee;   /* subtle edge highlight */
-  --btnclr:        #8f76b8;   /* window button color */
-  --techclr:       #352269;   /* tech stack highlight color */
+  --window-border: #c9b7e6; 
+  --window-inner:  #ece5f5;
+  --window-text:   #4a3570;
+  --title-text:    #4f2a8f;
+  --outline:       #d8caee;
+  --btnclr:        #8f76b8;
+  --techclr:       #352269;
 }
+*/
 
+:root[data-theme="light"] {
+  --window-border: #b7cde6;   /* softer lilac frame */
+  --window-inner:  #e5eef5;   /* near-white inner panel */
+  --window-text:   #355a70;   /* dark purple text */
+  --title-text:    #2a4a8f;   /* title strip text/icons */
+  --outline:       #cadaee;   /* subtle edge highlight */
+  --btnclr:        #7685b8;   /* window button color */
+  --techclr:       #225369;   /* tech stack highlight color */
+}
 
 /* whole window */
 .window{

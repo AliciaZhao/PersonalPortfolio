@@ -9,7 +9,7 @@ export default function CandyConfetti() {
     confettiRef.current = new JSConfetti();
   }, []);
 
-  const candies = ["🍬", "🍫", "🍭", "🎃"];
+  const candies = ["❄️", "⛄", "🎅", "🎄"];
 
   function throwCandiesEverywhere() {
     confettiRef.current?.addConfetti({
